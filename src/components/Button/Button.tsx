@@ -1,7 +1,7 @@
 // src/components/Button/Button.tsx
 import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../lib/utils"; // Importamos nuestra utilidad
+import { cn } from "../../lib/utils"; // Importamos nuestra utilidad
 
 // 1. Definimos las variantes (La Receta)
 const buttonVariants = cva(

@@ -4,6 +4,7 @@ import "./index.css";
 export * from "./components/Button/Button";
 export * from "./components/Input/Input";
 export * from "./components/SearchBar/SearchBar";
+export * from "./components/ProductCard/ProductCard";
 
 // Exportamos las utilidades (opcional, pero muy útil)
 // Esto permite que quien use tu librería pueda usar tu función 'cn' para mezclar clases

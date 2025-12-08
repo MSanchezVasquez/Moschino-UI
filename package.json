@@ -1,6 +1,9 @@
 {
-  "name": "moschino-ui",
+  "name": "@mcodex23/moschino-ui",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.0.0",
   "type": "module",
   "files": [

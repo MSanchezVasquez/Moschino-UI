@@ -15,7 +15,7 @@
       "require": "./dist/moschino-ui.cjs",
       "types": "./dist/index.d.ts"
     },
-    "./styles.css": "./dist/moschino-ui.css"
+    "./moschino-ui.css": "./dist/moschino-ui.css"
   },
   "scripts": {
     "dev": "vite",

@@ -1,5 +1,7 @@
 {
   "name": "@mcodex23/moschino-ui",
+  "version": "0.0.1",
+  "homepage": "https://moschino-ui.vercel.app/",
   "private": false,
   "publishConfig": {
     "access": "public"

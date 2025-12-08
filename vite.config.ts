@@ -16,54 +16,63 @@ const dirname =
     : path.dirname(fileURLToPath(import.meta.url));
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
-export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-    dts({ rollupTypes: true, tsconfigPath: "./tsconfig.app.json" }),
-  ],
-  build: {
-    lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      name: "MoschinoUI",
-      fileName: "moschino-ui",
-      formats: ["es", "cjs"],
-    },
-    rollupOptions: {
-      // ⚠️ IMPORTANTE: Externalizamos React para no meterlo en el paquete
-      external: ["react", "react-dom", "react/jsx-runtime"],
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-        },
-      },
-    },
-  },
-  test: {
-    projects: [
-      {
-        extends: true,
-        plugins: [
-          storybookTest({
-            configDir: path.join(dirname, ".storybook"),
-          }),
-        ],
-        test: {
-          name: "storybook",
-          browser: {
-            enabled: true,
-            headless: true,
-            provider: playwright({}),
-            instances: [
-              {
-                browser: "chromium",
-              },
-            ],
-          },
-          setupFiles: [".storybook/vitest.setup.ts"],
-        },
-      },
+export default defineConfig(({ mode }) => {
+  const isLibrary = process.env.npm_lifecycle_event === "build";
+
+  return {
+    plugins: [
+      react(),
+      tailwindcss(),
+      isLibrary &&
+        dts({ rollupTypes: true, tsconfigPath: "./tsconfig.app.json" }),
     ],
-  },
+    build: isLibrary
+      ? {
+          lib: {
+            entry: resolve(__dirname, "src/index.ts"),
+            name: "MoschinoUI",
+            fileName: "moschino-ui",
+            formats: ["es", "cjs"],
+          },
+          rollupOptions: {
+            // ⚠️ IMPORTANTE: Externalizamos React para no meterlo en el paquete
+            external: ["react", "react-dom", "react/jsx-runtime"],
+            output: {
+              globals: {
+                react: "React",
+                "react-dom": "ReactDOM",
+              },
+            },
+          },
+        }
+      : {
+          outDir: "dist-storybook",
+        },
+    test: {
+      projects: [
+        {
+          extends: true,
+          plugins: [
+            storybookTest({
+              configDir: path.join(dirname, ".storybook"),
+            }),
+          ],
+          test: {
+            name: "storybook",
+            browser: {
+              enabled: true,
+              headless: true,
+              provider: playwright({}),
+              instances: [
+                {
+                  browser: "chromium",
+                },
+              ],
+            },
+            setupFiles: [".storybook/vitest.setup.ts"],
+          },
+        },
+      ],
+    },
+  };
 });

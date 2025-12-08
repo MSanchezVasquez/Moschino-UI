@@ -1,3 +1,5 @@
+import "./index.css";
+
 // Exportamos los componentes
 export * from "./components/Button/Button";
 export * from "./components/Input/Input";

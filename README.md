@@ -28,6 +28,6 @@ function App() {
 }
 ```
 
-Mira todos los componentes en nuestro Storybook: [Pega aquí tu link de Vercel]
+Mira todos los componentes en nuestro Storybook: [Storybook](https://moschino-ui.vercel.app/)
 
 ---
